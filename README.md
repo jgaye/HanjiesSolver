@@ -1,5 +1,17 @@
 HanjiesSolver
 =============
+22/07/14
+
+P: Le langage Python semble parfaitement adapté à l'implémentation du solveur Picross:
+- il est libre et multiplateforme
+- il dispose des conteneurs classique: liste, chaine, tuples, ...
+- il gère les exceptions (détection d'erreurs à la compilation)
+- il possède une syntaxe simple et lisible (possibilité de commenter le code)
+- il est supporté par De nombreux éditeurs de texte et IDE.
+
+-Versionnage de l'outil:
+Je pense qu'il serait bon de découper le développement de l'outil en plusieurs grandes phases. A la fin de chaque phase, l'outil devra etre compilable, executable et testé sur une série de Picross.
+Pour la première version de l'outil (v1.0) je pense qu'il faudrait se limiter à la résolution des Picross en ne raisonnant que sur une seule ligne ou colonne à la fois.
 
 22/07/14
 
