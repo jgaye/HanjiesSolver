@@ -1,0 +1,114 @@
+#===============
+# Initialization
+#===============
+
+function init_result
+    * input:
+        - int M
+        - int N
+    * output: res (size MxN)
+    * body:
+        res=[-1 for i in xrange(N)]
+        res=[res[:] for j in xrange(M)]
+        return res
+            
+
+#==============
+# Set box value
+#==============
+
+function set_box_value
+    * input:
+        - self: list of boxes
+        - index: int between 0 and len(self) - 1
+        - value: 0|1
+    * output: None
+    * body:
+        if self[index] == - 1:
+            self[index] = value
+        elif self[index] != value:
+            raise FATAL_ERROR("box may not have two different values!")
+
+
+#======================
+# Process list of boxes
+#======================
+
+function process_list_of_boxes
+    * input:
+        - self: list of size S
+        - clues: list of size C
+    * output: None
+    * body:
+        margin = S - (sum(clues) + len(clues) - 1)
+        cur_index = 0
+
+        if margin == 0:
+            for clue in clues:
+                for i in cur_index .. cur_index + clue - 1:
+                    set_box_value (self, i, 1)
+
+                cur_index += clue
+
+                if cur_index <= len (self):
+                    set_box_value (self, cur_index, 0)
+
+                    cur_index += 1
+
+        else:
+            for clues in clues:
+                if clue > margin:
+                    cur_index += margin
+
+                    for i in cur_index .. cur_index + clue - margin - 1:
+                        set_box_value (self, i, 1)
+
+                        # skip one empty box
+                        cur_index += clue - margin + 1
+
+
+#===============
+# Process Matrix
+#===============
+
+function process_matrix
+    * input:
+        - self: matrix of size MxN
+        - column_clues: list of size M
+        - row_clues: list of size N
+    * output: None
+    * body:
+        # make a copy of the matrix before processing boxes
+        orig_mat = mat
+
+        for i in 1..width(res):
+            process_boxes (column(self, i), column_clues (i))
+
+        for j in 1..height(res):
+            process_boxes (row(self, j), row_clues (j))
+
+        # verify mat has been changed during process
+        if mat == orig_mat:
+            raise FATAL_ERROR("no remaining solvable boxes!")
+
+
+#=====
+# Main
+#=====
+
+function solve_picross
+    * input:
+        - column_clues: list of size M
+        - row_clues: list of size N
+    * output:
+        - res: list of size MxN
+    * body:
+        mat=init_result(len(column_clues), len(row_clues))
+
+        while mat.count(-1) > 0:
+            try:
+                process_matrix(mat, column_clues, row_clues)
+            except FATAL_ERROR:
+                print "picross is not solvable!"
+
+        return mat
