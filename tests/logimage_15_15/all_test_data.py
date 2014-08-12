@@ -1,3 +1,8 @@
+import os
+import sys
+src_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../src'))
+if not src_path in sys.path:
+    sys.path.insert(1, src_path)
 from test_framework import TestData
 
 all_test_data = [
@@ -277,7 +282,7 @@ all_test_data = [
 	    [1,2,2,1,1,2],
 	    [1,2,2,2,4],
 	    [1,2,2,1,2,2],
-	    [1,2,3,4,1]
+	    [1,2,3,4,1],
 	    [1,5,5,1],
 	    [1,4,2,1,1,1],
 	    [2,2,7,1],
@@ -290,7 +295,7 @@ all_test_data = [
         expected=[]),
         
     #=======
-    # Test 7
+    # Test 8
     #=======
 
     TestData(test_name="test_8_fruits_rouges",

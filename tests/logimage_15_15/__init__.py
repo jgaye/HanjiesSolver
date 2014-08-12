@@ -1,16 +1,18 @@
+import os
 import sys
-sys.path.insert(0, "../src")
 from all_test_data import all_test_data
+src_path=os.path.abspath(os.path.join(os.path.dirname(__file__), '../src'))
+if not src_path in sys.path:
+    sys.path.insert(1, src_path)
 import test_framework
 import unittest
 import inspect
 
-current_module=sys.modules[__name__]
-
-#def discover():
-test_framework.generate_test_classes(test_module=current_module,
+test_framework.generate_test_classes(test_module=sys.modules[__name__],
     test_data_list=all_test_data, root_test_class=test_framework.RootTest)
 
-
-if __name__ == '__main__':
-    unittest.main()
+def load_tests(loader, standard_tests, pattern):
+    test_dir = os.path.dirname(__file__)
+    package_tests = loader.discover(start_dir=test_dir, pattern=pattern)
+    standard_tests.addTests(package_tests)
+    return standard_tests
