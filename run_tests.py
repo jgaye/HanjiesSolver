@@ -67,5 +67,5 @@ else:
     # run all tests together
     if __name__ == '__main__':
         test_runner = unittest.TextTestRunner(verbosity=options.verbose)
-        test_suite = unittest.TestLoader().discover('tests', pattern='logimage*')
+        test_suite = unittest.TestLoader().discover('tests', pattern='*[!.py]')
         test_runner.run (test_suite)
