@@ -12,15 +12,24 @@ It takes the following options and arguments:
 
 ./run_tests.py [-v|--verbose|-q|--quiet] [args]
 
-args refer to test names so that individual tests can be run directly from the
-tool.
+    where args may refer either to a testsuite (i.e. <testsuite_name>) or to a
+    test itself (i.e. <testsuite_name>.<test_name>).
+
 By default, if no args are provided, the script will run all tests from modules
 starting from the dir 'tests/'.
+
+There are three different kinds of possible run:
+- a single test in case a test name is passed as argument
+- all tests from a testsuite in case a testsuite name is passed as argument
+- all existing tests in case none argument is provided
 
 Example command to run a single test (with verbose option):
     ./run_tests.py -v logimage_15_15.test_2_nomade
 
-Example command to run all tests (with quiet option):
+Example command to run all tests from a testsuite:
+    ./run_tests.py -v logimage_15_15
+
+Example command to run all existing tests (with quiet option):
     ./run_tests.py -q
 """
 
