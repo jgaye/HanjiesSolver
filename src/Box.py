@@ -27,22 +27,13 @@ class Box(object):
     #Status getters
 
     def is_unknown(self):
-        if self.status == -1:
-            return True
-        else :
-            return False
+        return self.status == -1
 
     def is_white(self):
-        if self.status == 0:
-            return True
-        else:
-            return False
+        return self.status == 0
 
     def is_black(self):
-        if self.status == 1:
-            return True
-        else:
-            return False
+        return self.status == 1
 
     #Representation
 
