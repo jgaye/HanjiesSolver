@@ -1,3 +1,5 @@
+import sys
+
 class Box(object):
     """
     A Box is an object that have one of these three status: unknown (-1), white
@@ -38,10 +40,13 @@ class Box(object):
 
     #Representation
 
-    def __repr__(self):
+    def __str__(self):
         if self.is_unknown():
-            return "[?]"
+#            return "?"
+	    retun "[?]"
         elif self.is_white():
+#            return u"\u25A1"
             return "[ ]"
-        else:
-            return "[X]"
+	else:
+#            return u"\u25A0"
+	    return "[X]"
